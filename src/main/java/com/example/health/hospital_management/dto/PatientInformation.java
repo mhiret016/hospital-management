@@ -1,0 +1,13 @@
+package com.example.health.hospital_management.dto;
+
+public record PatientInformation(
+        Long id,
+        String firstName,
+        String lastName,
+        String dateOfBirth,
+        String biologicalSex,
+        String phoneNumber,
+        String address,
+        String allergies
+) {
+}
