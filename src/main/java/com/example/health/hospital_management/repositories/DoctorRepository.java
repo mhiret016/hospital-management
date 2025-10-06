@@ -8,12 +8,16 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
-    @Query("SELECT d FROM Doctor d WHERE d.lastName LIKE %:name% OR d.firstName LIKE %:name%")
-    List<Doctor> searchByName(@Param("name") String name);
+    List<Doctor> findAllBySpecializationIgnoreCase(String specialization);
 
-    List<Doctor> findBySpecialization(String specialization);
+    List<Doctor> findAllByDepartmentIgnoreCaseOrderByLastNameAsc(String department);
 
-    List<Doctor> findAllByOrderByLastNameAsc();
-
-    long countBySpecialization(String specialization);
+    @Query("""
+      SELECT d FROM Doctor d
+      WHERE (:dept IS NULL OR :dept = '' OR LOWER(d.department) = LOWER(:dept))
+        AND (:name IS NULL OR :name = '' OR
+             LOWER(d.lastName)  LIKE LOWER(CONCAT('%', :name, '%')))
+            ORDER BY d.lastName ASC
+    """)
+    List<Doctor> search(@Param("dept") String dept, @Param("name") String name );
 }

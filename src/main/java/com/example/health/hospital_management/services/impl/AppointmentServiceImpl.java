@@ -5,7 +5,6 @@ import com.example.health.hospital_management.entities.enums.Status;
 import com.example.health.hospital_management.exceptions.ResourceNotFoundException;
 import com.example.health.hospital_management.repositories.AppointmentRepository;
 import com.example.health.hospital_management.services.AppointmentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -14,9 +13,11 @@ import java.util.List;
 
 @Service
 public class AppointmentServiceImpl implements AppointmentService {
+    private final AppointmentRepository appointmentRepository;
 
-    @Autowired
-    private AppointmentRepository appointmentRepository;
+    public AppointmentServiceImpl(AppointmentRepository appointmentRepository) {
+        this.appointmentRepository = appointmentRepository;
+    }
 
     @Override
     public List<Appointment> getAllAppointments() {
@@ -36,16 +37,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public Appointment updateAppointment(Long id, Appointment appointment) {
-        Appointment existingAppointment = getAppointmentById(id);
-        appointment.setId(existingAppointment.getId());
+        getAppointmentById(id);
+        appointment.setId(id);
         return appointmentRepository.save(appointment);
     }
 
     @Override
     public void deleteAppointment(Long id) {
-        if (!appointmentRepository.existsById(id)) {
-            throw new ResourceNotFoundException("Appointment not found with id: " + id);
-        }
         appointmentRepository.deleteById(id);
     }
 

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EVA Hospital | Doctors</title>
+    <link rel="stylesheet" th:href="@{/global-styles.css}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="navbar-container">
+        <a href="/" class="navbar-brand">EVA Hospital</a>
+        <div class="nav-links">
+            <a href="/services">Services</a>
+            <a href="/doctors">Doctors</a>
+            <a href="/appointments">Appointments</a>
+            <a href="/contact">Contact</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+</nav>
+
+<div class="table-section">
+    <h2>Our Doctors</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Specialization</th>
+            <th>Department</th>
+            <th>Contact</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="doctor : ${doctors}">
+            <td th:text="${doctor.firstName + ' ' + doctor.lastName}"></td>
+            <td th:text="${doctor.specialization}"></td>
+            <td th:text="${doctor.department}"></td>
+            <td th:text="${doctor.phone}"></td>
+            <td>
+                <button th:onclick="'showModal(\'doctor' + ${doctor.id} + '\')'">View Details</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div th:each="doctor : ${doctors}" th:id="'doctor' + ${doctor.id}" class="modal">
+    <div class="modal-content">
+        <h3>Doctor Details</h3>
+        <p><strong>Name:</strong> <span th:text="${doctor.firstName + ' ' + doctor.lastName}"></span></p>
+        <p><strong>Specialization:</strong> <span th:text="${doctor.specialization}"></span></p>
+        <p><strong>Department:</strong> <span th:text="${doctor.department}"></span></p>
+        <p><strong>Phone:</strong> <span th:text="${doctor.phone}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${doctor.email}"></span></p>
+        <button th:onclick="'hideModal(\'doctor' + ${doctor.id} + '\')'">Close</button>
+    </div>
+</div>
+
+<script>
+    function showModal(id) {
+        document.getElementById(id).style.display = 'flex';
+    }
+
+    function hideModal(id) {
+        document.getElementById(id).style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
+    }
+</script>
+</body>
+</html>

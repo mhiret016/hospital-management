@@ -1,4 +1,4 @@
-package com.example.health.hospital_management.dto;
+package com.example.health.hospital_management.dtos;
 
 public record PatientInformation(
         Long id,

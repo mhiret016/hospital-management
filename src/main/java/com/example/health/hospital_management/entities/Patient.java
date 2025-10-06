@@ -69,9 +69,10 @@ public class Patient extends AuditableEntity {
     private List<String> allergies = new ArrayList<>();
 
     @ManyToOne
+    @JoinColumn(name = "doctor_id")
     private Doctor primaryDoctor;
 
-    @OneToMany(mappedBy = "patient")
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Appointment> appointments = new ArrayList<>();
 }

@@ -1,21 +1,26 @@
-/* General Reset */
+/* ====================================================
+   🌐 Global Styles for EVA Hospital (Fresh Medical Theme)
+   Colors: #EBFFFB, #7EFAFF, #13ABC4, #3161A3
+   ==================================================== */
+
+/* === Global Reset === */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Global Styles */
+/* === Base Typography === */
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #0E185F;
-    color: #E8FFC2;
+    font-family: Arial, sans-serif;
+    background-color: #EBFFFB;     /* Mint White */
+    color: #3161A3;                /* Deep Blue text */
     line-height: 1.6;
 }
 
-/* Navbar */
+/* === Navbar === */
 .navbar {
-    background-color: #2FA4FF;
+    background-color: #3161A3;     /* Deep Blue */
     padding: 1rem 2rem;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
@@ -29,100 +34,254 @@ body {
 .navbar-brand {
     font-size: 1.5rem;
     font-weight: bold;
-    color: #E8FFC2;
+    color: #7EFAFF; /* Cyan highlight */
     text-decoration: none;
 }
 
 .nav-links a {
-    color: #E8FFC2;
+    color: #EBFFFB; /* Light mint links */
     margin-left: 1.5rem;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s ease-in-out;
 }
 
 .nav-links a:hover {
-    color: #0E185F;
+    color: #7EFAFF; /* Cyan hover */
 }
 
-/* Hero Section */
+/* === Hero Section === */
 .hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    background: linear-gradient(rgba(49,97,163,0.85), rgba(19,171,196,0.85)),
+    url("https://picsum.photos/1600/800?hospital") no-repeat center/cover;
     text-align: center;
-    padding: 4rem 2rem;
-    background: linear-gradient(rgba(14, 24, 95, 0.85), rgba(14, 24, 95, 0.85)),
-    url("https://picsum.photos/1600/600?hospital") no-repeat center/cover;
+    padding: 2rem;
 }
 
-.hero-section h1 {
+.hero-content h1 {
     font-size: 3rem;
     margin-bottom: 1rem;
-    color: #E8FFC2;
+    color: #3161A3;
 }
 
-.hero-section p {
+.hero-content p {
     font-size: 1.25rem;
     margin-bottom: 2rem;
-    color: #E8FFC2;
+    color: #13ABC4;
 }
 
 .cta-button {
-    background-color: #2FA4FF;
-    color: #E8FFC2;
+    background-color: #13ABC4; /* Aqua Blue */
+    color: #EBFFFB;            /* White text */
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: background 0.3s, color 0.3s;
+    transition: all 0.3s;
 }
 
 .cta-button:hover {
-    background-color: #E8FFC2;
-    color: #0E185F;
+    background-color: #7EFAFF;
+    color: #3161A3;
 }
 
-/* Services Section */
+/* === Services Section === */
 .services-section {
-    padding: 3rem 2rem;
+    background-color: #7EFAFF; /* Cyan Light */
+    padding: 4rem 2rem;
     text-align: center;
+    color: #3161A3;
 }
 
 .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
+    gap: 2rem;
     margin-top: 2rem;
 }
 
 .service-card {
-    background-color: #2FA4FF;
+    background-color: #13ABC4;
     padding: 2rem;
     border-radius: 12px;
-    color: #E8FFC2;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-    transition: transform 0.2s ease-in-out;
+    color: #EBFFFB;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-.service-card:hover {
-    transform: translateY(-5px);
-}
-
-/* Contact Section */
+/* === Contact Section === */
 .contact-section {
     padding: 3rem 2rem;
-    background-color: rgba(47, 164, 255, 0.2);
+    background-color: #3161A3;
     text-align: center;
+    color: #EBFFFB;
 }
 
-.contact-info p {
-    margin: 0.5rem 0;
-    font-size: 1.1rem;
-}
-
-/* Footer */
+/* === Footer === */
 footer {
-    background-color: #2FA4FF;
+    background-color: #13ABC4;
     text-align: center;
     padding: 1rem;
-    color: #E8FFC2;
-    margin-top: 2rem;
+    color: #EBFFFB;
+}
+
+/* === Patient Table Section === */
+.table-section {
+    padding: 3rem 2rem;
+    background-color: #EBFFFB;
+    color: #3161A3;
+}
+
+.table-section table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 1rem;
+}
+
+.table-section th, .table-section td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #13ABC4;
+}
+
+.table-section th {
+    background-color: #3161A3;
+    color: #EBFFFB;
+}
+
+.table-section tr:hover {
+    background-color: #7EFAFF;
+    color: #3161A3;
+}
+
+.table-section button {
+    padding: 6px 12px;
+    border: none;
+    background-color: #13ABC4;
+    color: #EBFFFB;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.table-section button:hover {
+    background-color: #3161A3;
+    color: #7EFAFF;
+}
+
+/* === Form/Card Section === */
+.card {
+    max-width: 600px;
+    margin: 4rem auto;
+    padding: 2rem;
+    background-color: #7EFAFF;
+    border-radius: 10px;
+    color: #3161A3;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.card form div {
+    margin-bottom: 1rem;
+}
+
+.card label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #3161A3;
+}
+
+.card input, .card select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #13ABC4;
+    border-radius: 6px;
+    font-size: 1rem;
+    background-color: #fff;
+    color: #121013;
+}
+
+.card button {
+    background-color: #13ABC4;
+    color: #EBFFFB;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.card button:hover {
+    background-color: #3161A3;
+    color: #7EFAFF;
+}
+
+/* === Modal Styles === */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(49,97,163,0.7);
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal-content {
+    background-color: #13ABC4;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 60%;
+    max-width: 600px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: #EBFFFB;
+    animation: slideUp 0.3s ease-in-out;
+    text-align: left;
+}
+
+.modal-content h3 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #EBFFFB;
+}
+
+.modal-content p {
+    margin: 0.5rem 0;
+}
+
+.modal-content button {
+    margin-top: 1.5rem;
+    background-color: #7EFAFF;
+    color: #3161A3;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.modal-content button:hover {
+    background-color: #3161A3;
+    color: #EBFFFB;
+}
+
+/* === Animations === */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }

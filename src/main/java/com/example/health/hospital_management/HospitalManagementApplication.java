@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-@EnableJpaAuditing
 @SpringBootApplication
 public class HospitalManagementApplication implements CommandLineRunner {
 
@@ -32,71 +31,87 @@ public class HospitalManagementApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) {
-		if (patientRepository.count() > 0 && doctorRepository.count() > 0) {
-			System.out.println("Patients and doctors already exist in the database. Skipping data generation.");
+	public void run(String... args) throws Exception {
+		if (patientRepository.count() > 0) {
+			System.out.println("Patients already exist in the database. Skipping data generation.");
 
-			// Demo custom queries
-			patientRepository.findAllByDateOfBirthOrderByLnameAsc(LocalDate.of(1981, 7, 1))
+			patientRepository.findAllByDateOfBirthOrderByLnameAsc(LocalDate.of(1981, 5, 19))
 					.forEach(System.out::println);
-			patientRepository.searchByName("K").forEach(System.out::println);
+
+			patientRepository.searchByName("L").forEach(System.out::println);
+
 			return;
 		}
-
-		List<Doctor> doctors = generateDoctors();
-		doctors = doctorRepository.saveAll(doctors);
-		System.out.println("Sample doctors generated and saved to the database.");
-
-		List<Patient> patients = generatePatients(doctors);
-		patientRepository.saveAll(patients);
-		System.out.println("Sample patients generated and saved to the database.");
-	}
-
-	private List<Doctor> generateDoctors() {
-		Faker faker = new Faker();
-		List<Doctor> doctors = new ArrayList<>();
-		String[] specializations = {"Cardiology", "Pediatrics", "Orthopedics", "Neurology", "General Medicine"};
-
-		for (int i = 0; i < 10; i++) {
-			Doctor doctor = new Doctor(
-					0,
-					faker.name().firstName(),
-					faker.name().lastName(),
-					specializations[faker.random().nextInt(specializations.length)],
-					faker.phoneNumber().cellPhone(),
-					faker.internet().emailAddress(),
-					null,
-					null
-			);
-			doctors.add(doctor);
-		}
-		return doctors;
-	}
-
-	private List<Patient> generatePatients(List<Doctor> doctors) {
+		List<String> specializations = new ArrayList<>(List.of(
+				"Cardiology",
+				"Dermatology",
+				"Endocrinology",
+				"Gastroenterology",
+				"Hematology",
+				"Neurology",
+				"Obstetrics and Gynecology",
+				"Oncology",
+				"Ophthalmology",
+				"Orthopedics",
+				"Otolaryngology (ENT)",
+				"Pediatrics",
+				"Psychiatry",
+				"Pulmonology",
+				"Radiology",
+				"Rheumatology",
+				"Surgery",
+				"Urology"
+		));
 		Faker faker = new Faker();
 		Random random = new Random();
 		List<Patient> patients = new ArrayList<>();
+		List<Doctor> doctors = new ArrayList<>();
 
-		for (int i = 0; i < 50; i++) {
-			Doctor doctor = doctors.get(random.nextInt(doctors.size()));
+		for (int i = 0; i < 15; i++) {
+			String firstName = faker.name().firstName();
+			String lastName = faker.name().lastName();
+			String department = faker.medical().hospitalName();
+			String specialization = specializations.get(random.nextInt(specializations.size()));
+			String phone = faker.phoneNumber().cellPhone();
+			String email = faker.internet().emailAddress();
 
-			Patient patient = Patient.builder()
-					.fname(faker.name().firstName())
-					.lname(faker.name().lastName())
-					.dateOfBirth(faker.date().birthday(0, 90).toInstant()
-							.atZone(java.time.ZoneId.systemDefault())
-							.toLocalDate())
-					.biologicalSex(random.nextBoolean() ? BiologicalSex.MALE : BiologicalSex.FEMALE)
-					.phone(faker.phoneNumber().cellPhone())
-					.address(faker.address().fullAddress())
-					.allergies(List.of("Peanuts", "Gluten"))
-					.primaryDoctor(doctor)
+			Doctor doctor = Doctor.builder()
+					.firstName(firstName)
+					.lastName(lastName)
+					.department(department)
+					.phone(phone)
+					.email(email)
+					.specialization(specialization)
 					.build();
-
-			patients.add(patient);
+			doctors.add(doctor);
 		}
 
-		return patients;
+		for (int i = 0; i < 50; i++) {
+			String fname = faker.name().firstName();
+			String lname = faker.name().lastName();
+			LocalDate dateOfBirth = LocalDate.now().minusYears(10 + random.nextInt(70)).minusDays(random.nextInt(365));
+			BiologicalSex biologicalSex = BiologicalSex.values()[random.nextInt(BiologicalSex.values().length)];
+			String phone = faker.phoneNumber().cellPhone();
+			String address = faker.address().fullAddress();
+			List<String> allergies = List.of(faker.medical().diseaseName(), faker.medical().symptoms());
+
+			Patient patient = new Patient(
+					null,
+					fname,
+					lname,
+					dateOfBirth,
+					biologicalSex,
+					phone,
+					address,
+					allergies,
+					doctors.get(random.nextInt(doctors.size())),
+					null
+			);
+			patients.add(patient);
+			System.out.println(patient);
+		}
+		doctorRepository.saveAll(doctors);
+		patientRepository.saveAll(patients);
+		System.out.println("Sample patients generated and saved to the database.");
 	}
 }

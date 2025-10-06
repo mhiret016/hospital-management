@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>EVA Hospital</title>
-    <link rel="stylesheet" href="/global-styles.css">
+    <link rel="stylesheet" th:href="@{/global-styles.css}">
 </head>
 <body>
 <!-- Navbar -->
@@ -17,19 +17,22 @@
             <a href="/contact">Contact</a>
             <a href="/login">Login</a>
             <a href="/register">Register</a>
+            <a href="/patients">Patients</a>
         </div>
     </div>
 </nav>
 
 <!-- Hero Section -->
-<div class="hero-section">
-    <h1>Welcome to EVA Hospital</h1>
-    <p>Advanced Healthcare for a Better Tomorrow</p>
-    <a href="/appointments" class="cta-button">Book Appointment</a>
-</div>
+<section class="hero-section">
+    <div class="hero-content">
+        <h1>Welcome to EVA Hospital</h1>
+        <p>Advanced Healthcare for a Better Tomorrow</p>
+        <a href="/appointments" class="cta-button">Book Appointment</a>
+    </div>
+</section>
 
 <!-- Services Section -->
-<div class="services-section">
+<section class="services-section">
     <h2>Our Services</h2>
     <div class="services-grid">
         <div class="service-card">
@@ -45,17 +48,17 @@
             <p>Expert medical specialists</p>
         </div>
     </div>
-</div>
+</section>
 
 <!-- Contact Section -->
-<div class="contact-section">
+<section class="contact-section">
     <h2>Get in Touch</h2>
     <div class="contact-info">
-        <p>Emergency: (123) 456-7890</p>
-        <p>Email: info@evahospital.com</p>
-        <p>Location: 123 Medical Center Drive</p>
+        <p><strong>Emergency:</strong> (123) 456-7890</p>
+        <p><strong>Email:</strong> info@evahospital.com</p>
+        <p><strong>Location:</strong> 123 Medical Center Drive</p>
     </div>
-</div>
+</section>
 
 <!-- Footer -->
 <footer>

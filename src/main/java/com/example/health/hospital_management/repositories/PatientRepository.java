@@ -9,9 +9,10 @@ import java.util.List;
 
 public interface PatientRepository extends JpaRepository<Patient, Long> {
 
-    // Corrected: use dateOfBirth instead of dob
     List<Patient> findAllByDateOfBirthOrderByLnameAsc(LocalDate dateOfBirth);
 
-    @Query("SELECT p FROM Patient p WHERE p.lname LIKE %?1% OR p.fname LIKE %?1%")
+    @Query("SELECT p FROM Patient p " +
+            "WHERE p.lname " +
+            "LIKE %?1% OR p.fname LIKE %?1%")
     List<Patient> searchByName(String name);
 }

@@ -1,65 +1,75 @@
 package com.example.health.hospital_management.services.impl;
 
+import com.example.health.hospital_management.dtos.DoctorInformation;
+import com.example.health.hospital_management.dtos.PostNewDoctorRequest;
+import com.example.health.hospital_management.dtos.UpdateDoctorRequest;
 import com.example.health.hospital_management.entities.Doctor;
-import com.example.health.hospital_management.exceptions.ResourceNotFoundException;
+import com.example.health.hospital_management.exceptions.DoctorNotFoundException;
 import com.example.health.hospital_management.repositories.DoctorRepository;
 import com.example.health.hospital_management.services.DoctorService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.health.hospital_management.utils.mappers.DoctorMapper;
+import jakarta.validation.constraints.NotNull;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
+@RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
     private final DoctorRepository doctorRepository;
 
-    @Autowired
-    public DoctorServiceImpl(DoctorRepository doctorRepository) {
-        this.doctorRepository = doctorRepository;
+    @Override
+    public List<DoctorInformation> getAllDoctors() {
+        return doctorRepository.findAll()
+                .stream()
+                .map(DoctorMapper::toDto)
+                .toList();
     }
 
     @Override
-    public List<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
-    }
-
-    @Override
-    public Doctor getDoctorById(Long id) {
+    public @NotNull(message = "Doctor is required") Doctor getDoctorById(Long id) {
         return doctorRepository.findById(id)
-            .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id: " + id));
+                .orElseThrow(() -> new DoctorNotFoundException("Doctor with the id " + id + " not found!"));
     }
 
     @Override
-    public Doctor createDoctor(Doctor doctor) {
-        return doctorRepository.save(doctor);
+    public Doctor getDoctorEntityById(Long id) {
+        return null;
     }
 
     @Override
-    public Doctor updateDoctor(Long id, Doctor doctor) {
-        Doctor existingDoctor = getDoctorById(id);
-        existingDoctor.setFirstName(doctor.getFirstName());
-        existingDoctor.setLastName(doctor.getLastName());
-        existingDoctor.setSpecialization(doctor.getSpecialization());
-        existingDoctor.setPhone(doctor.getPhone());
-        existingDoctor.setEmail(doctor.getEmail());
-        return doctorRepository.save(existingDoctor);
+    public List<DoctorInformation> getDoctorsBySpecialization(String specialization) {
+        return doctorRepository.findAllBySpecializationIgnoreCase(specialization)
+                .stream()
+                .map(DoctorMapper::toDto)
+                .toList();
+    }
+
+    @Override
+    public DoctorInformation createDoctor(PostNewDoctorRequest request) {
+        Doctor doctor = DoctorMapper.toEntity(request);
+        return DoctorMapper.toDto(doctorRepository.save(doctor));
+    }
+
+    @Override
+    public DoctorInformation updateDoctor(Long id, UpdateDoctorRequest request) {
+        Doctor doctor = doctorRepository.findById(id)
+                .orElseThrow(() -> new DoctorNotFoundException("Doctor with the id " + id + " not found!"));
+        doctor.setFirstName(request.firstName());
+        doctor.setLastName(request.lastName());
+        doctor.setPhone(request.phone());
+        doctor.setDepartment(request.department());
+        doctor.setSpecialization(request.specialization());
+        doctor.setEmail(request.email());
+        return DoctorMapper.toDto(doctorRepository.save(doctor));
     }
 
     @Override
     public void deleteDoctor(Long id) {
-        Doctor doctor = getDoctorById(id);
-        doctorRepository.delete(doctor);
-    }
-
-    @Override
-    public List<Doctor> searchDoctors(String name) {
-        return doctorRepository.searchByName(name);
-    }
-
-    @Override
-    public List<Doctor> findBySpecialization(String specialization) {
-        return doctorRepository.findBySpecialization(specialization);
+        if (!doctorRepository.existsById(id)) {
+            throw new DoctorNotFoundException("Doctor with the id " + id + " not found!");
+        }
+        doctorRepository.deleteById(id);
     }
 }
