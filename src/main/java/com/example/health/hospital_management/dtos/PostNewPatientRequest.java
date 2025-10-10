@@ -47,4 +47,3 @@ public record PostNewPatientRequest(
         }
 }
 
-

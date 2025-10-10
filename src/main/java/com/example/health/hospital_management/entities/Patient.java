@@ -12,10 +12,12 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "eva_patients")
-@Data
+@Getter
+@Setter
+@ToString(exclude = {"allergies", "appointments"})
+@EqualsAndHashCode(callSuper = true, exclude = {"allergies", "appointments"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -59,7 +61,7 @@ public class Patient extends AuditableEntity {
     @Size(max = 500, min = 5, message = "Address must be between 5 and 500 characters")
     private String address;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(
             name = "patient_allergies",
             joinColumns = @JoinColumn(name = "patient_id")
@@ -68,11 +70,16 @@ public class Patient extends AuditableEntity {
     @Builder.Default
     private List<String> allergies = new ArrayList<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "doctor_id")
     private Doctor primaryDoctor;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(
+            mappedBy = "patient",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
+    )
     @Builder.Default
     private List<Appointment> appointments = new ArrayList<>();
 }

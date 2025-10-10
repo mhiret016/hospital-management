@@ -1,13 +1,13 @@
 package com.example.health.hospital_management.dtos;
 
 public record PatientInformation(
-        Long id,
+        long id,
         String firstName,
         String lastName,
-        String dateOfBirth,
-        String biologicalSex,
         String phoneNumber,
         String address,
+        String dateOfBirth,
+        String biologicalSex,
         String allergies
 ) {
 }

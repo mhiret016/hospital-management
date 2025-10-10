@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
-public record AppointmentDTO() {
+public final class AppointmentDTO {
     private static Long id;
 
     @NotNull(message = "Patient ID is required")
@@ -25,4 +25,7 @@ public record AppointmentDTO() {
     private static LocalTime time;
 
     private static String status;
+
+    public AppointmentDTO() {
+    }
 }

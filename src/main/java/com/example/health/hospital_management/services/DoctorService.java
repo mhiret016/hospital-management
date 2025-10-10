@@ -15,8 +15,15 @@ public interface DoctorService {
     Doctor getDoctorById(Long id);
 
     Doctor getDoctorEntityById(Long id);
+
+    DoctorInformation getDoctorById(long id);
+
     List<DoctorInformation> getDoctorsBySpecialization(String specialization);
     DoctorInformation createDoctor(PostNewDoctorRequest request);
     DoctorInformation updateDoctor(Long id, UpdateDoctorRequest request);
     void deleteDoctor(Long id);
+
+    DoctorInformation updateDoctor(long id, UpdateDoctorRequest request);
+
+    void deleteDoctorById(long id);
 }

@@ -2,92 +2,76 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Patient Index</title>
-    <link rel="stylesheet" href="/global-styles.css">
+    <title>EVA Hospital | Patient Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/global-styles.css">
 </head>
 <body>
-<!-- Patient Table -->
-<div class="table-section">
-    <h2>Patient List</h2>
+<div>
+    <h2>EVA Patient Data Index</h2>
+</div>
+<div>
     <table>
         <thead>
         <tr>
-            <th>Full Name</th>
-            <th>Date of Birth</th>
-            <th>Biological Sex</th>
-            <th>Phone Number</th>
-            <th>Action</th>
+            <th>
+                Full Name
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            <th>
+                Biological Sex
+            </th>
+            <th>
+                Phone Number
+            </th>
         </tr>
         </thead>
-        <tbody>
-        <!-- Example data; replace with Thymeleaf loop -->
+        <tbody th:each="patient : ${patients}">
         <tr>
-            <td>John Doe</td>
-            <td>1985-04-12</td>
-            <td>MALE</td>
-            <td>123-456-7890</td>
+            <td th:text="${patient.firstName()} + ' ' + ${patient.lastName()}"></td>
+            <td th:text="${patient.dateOfBirth()}"></td>
+            <td th:text="${patient.biologicalSex()}"></td>
+            <td th:text="${patient.phoneNumber()}"></td>
             <td>
-                <button onclick="showModal('patient1')">View Details</button>
-            </td>
-        </tr>
-        <tr>
-            <td>Jane Smith</td>
-            <td>1990-09-21</td>
-            <td>FEMALE</td>
-            <td>987-654-3210</td>
-            <td>
-                <button onclick="showModal('patient2')">View Details</button>
+                <button th:attr="onclick=|showModal('patientInfo' + ${patient.id()})|">
+                    View Details
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-
-<!-- Modal for Patient 1 -->
-<div id="patient1" class="modal">
-    <div class="modal-content">
-        <h3>Patient Details</h3>
-        <p><strong>Full Name:</strong> John Doe</p>
-        <p><strong>Date of Birth:</strong> 1985-04-12</p>
-        <p><strong>Biological Sex:</strong> MALE</p>
-        <p><strong>Phone Number:</strong> 123-456-7890</p>
-        <p><strong>Address:</strong> 123 Main St</p>
-        <p><strong>Allergies:</strong> Peanuts, Gluten</p>
-        <button onclick="hideModal('patient1')">Close</button>
+<div
+        th:each="patient : ${patients}"
+        th:attr="id=${'patientInfo' + patient.id()}"
+        style="display: none"
+>
+    <div class="card">
+        <h4>Patient Details</h4>
+        <h5>Patient Name: <span
+                th:text="${patient.firstName()} + ' ' + ${patient.lastName()}"
+        ></span> </h5>
+        <p>Date of birth: <span th:text="${patient.dateOfBirth()}"></span></p>
+        <p>Biological Sex: <span th:text="${patient.biologicalSex()}"></span></p>
+        <p>Phone Number: <span th:text="${patient.phoneNumber()}"></span></p>
+        <p>Address <span th:text="${patient.address()}"></span></p>
+        <div th:each="allergy : ${patient.allergies().split(',')}">
+            <p th:text="${allergy}"></p>
+        </div>
+        <button th:attr="onclick=|hideModal('patientInfo' + ${patient.id()})|">
+            Close
+        </button>
     </div>
 </div>
-
-<!-- Modal for Patient 2 -->
-<div id="patient2" class="modal">
-    <div class="modal-content">
-        <h3>Patient Details</h3>
-        <p><strong>Full Name:</strong> Jane Smith</p>
-        <p><strong>Date of Birth:</strong> 1990-09-21</p>
-        <p><strong>Biological Sex:</strong> FEMALE</p>
-        <p><strong>Phone Number:</strong> 987-654-3210</p>
-        <p><strong>Address:</strong> 456 Oak Ave</p>
-        <p><strong>Allergies:</strong> None</p>
-        <button onclick="hideModal('patient2')">Close</button>
-    </div>
-</div>
-
 <script>
-    function showModal(id) {
-        document.getElementById(id).style.display = 'flex';
+    function showModal(modalId) {
+        document.getElementById(modalId).style.display = 'block';
     }
 
-    function hideModal(id) {
-        document.getElementById(id).style.display = 'none';
-    }
-
-    // Close modal on outside click
-    window.onclick = function(event) {
-        const modals = document.getElementsByClassName("modal");
-        for (let modal of modals) {
-            if (event.target === modal) {
-                modal.style.display = "none";
-            }
-        }
+    function hideModal(modalId) {
+        document.getElementById(modalId).style.display = 'none';
     }
 </script>
 </body>

@@ -11,10 +11,6 @@ import java.util.List;
 public interface PatientService {
     PatientInformation createPatient(PostNewPatientRequest request);
     List<PatientInformation> getAllPatients();
-    @NotNull(message = "Patient is required") Patient getPatientById(long id);
-    PatientInformation updatePatient(long id, PostNewPatientRequest request);
-    void deletePatient(long id);
-    List<PatientInformation> searchPatients(String name, LocalDate dateOfBirth, String biologicalSex);
-    Patient getPatientEntityById(long id);
-
+    PatientInformation getPatientById(long id);
+    void deletePatientById(long id);
 }

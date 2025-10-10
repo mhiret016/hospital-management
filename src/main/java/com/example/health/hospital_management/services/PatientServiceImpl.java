@@ -1,4 +1,4 @@
-package com.example.health.hospital_management.services.impl;
+package com.example.health.hospital_management.services;
 
 import com.example.health.hospital_management.dtos.PatientInformation;
 import com.example.health.hospital_management.dtos.PostNewPatientRequest;
@@ -16,8 +16,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 @Primary
+@RequiredArgsConstructor
 public class PatientServiceImpl implements PatientService{
     private final PatientRepository patientRepository;
 
@@ -37,28 +37,16 @@ public class PatientServiceImpl implements PatientService{
     }
 
     @Override
-    public @NotNull(message = "Patient is required") Patient getPatientById(long id) {
+    public PatientInformation getPatientById(long id) {
         return patientRepository.findById(id)
+                .map(PatientMapper::toDto)
                 .orElseThrow(() -> new PatientNotFoundException("Patient with id " + id + " not found"));
     }
 
     @Override
-    public PatientInformation updatePatient(long id, PostNewPatientRequest request) {
-        return null;
-    }
-
-    @Override
-    public void deletePatient(long id) {
-
-    }
-
-    @Override
-    public List<PatientInformation> searchPatients(String name, LocalDate dateOfBirth, String biologicalSex) {
-        return null;
-    }
-
-    @Override
-    public Patient getPatientEntityById(long id) {
-        return null;
+    public void deletePatientById(long id) {
+        if(!patientRepository.existsById(id))
+            throw new PatientNotFoundException("Patient with id of " + id + " not found!");
+        patientRepository.deleteById(id);
     }
 }
