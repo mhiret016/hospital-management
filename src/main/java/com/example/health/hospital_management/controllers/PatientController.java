@@ -2,12 +2,10 @@ package com.example.health.hospital_management.controllers;
 
 import com.example.health.hospital_management.dtos.PatientInformation;
 import com.example.health.hospital_management.dtos.PostNewPatientRequest;
-import com.example.health.hospital_management.entities.Patient;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import com.example.health.hospital_management.services.PatientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

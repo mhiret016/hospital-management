@@ -9,33 +9,29 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "eva_patients")
-@Getter
-@Setter
-@ToString(exclude = {"allergies", "appointments"})
-@EqualsAndHashCode(callSuper = true, exclude = {"allergies", "appointments"})
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class Patient extends AuditableEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(nullable = false, length = 150)
     @NotNull(message = "First name is required")
     @Size(max = 150, min = 2, message = "First name must be between 2 and 150 characters")
-    private String fname;
+    private String firstName;
 
     @Column(nullable = false, length = 150)
     @NotNull(message = "Last name is required")
     @Size(max = 150, min = 2, message = "Last name must be between 2 and 150 characters")
-    private String lname;
+    private String lastName;
 
     @Column(nullable = false)
     @NotNull(message = "Date of birth is required")
@@ -44,42 +40,27 @@ public class Patient extends AuditableEntity {
 
     @NotNull(message = "Biological sex is required")
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private BiologicalSex biologicalSex;
 
     @Column(nullable = false, length = 15)
     @NotNull(message = "Phone number is required")
-    @Size(max = 20, min = 8, message = "Phone number must be between 8 and 20 characters")
-    @Pattern(
-            regexp = "^\\+?([0-9]{1,3})?[-. ]?\\(?([0-9]{1,3})\\)?[-. ]?([0-9]{3,4})[-. ]?([0-9]{4})$",
-            message = "Invalid phone number format"
-    )
-    private String phone;
+    @Size(max = 15, min = 10, message = "Phone number must be between 10 and 15 characters")
+    @Pattern(regexp = "^\\+?[0-9\\-\\s\\.\\(\\)]{10,15}$", message = "Phone number format is invalid")
+    private String phoneNumber;
 
     @Column(nullable = false, length = 500)
     @NotNull(message = "Address is required")
-    @Size(max = 500, min = 5, message = "Address must be between 5 and 500 characters")
+    @Size(max = 500, min = 2, message = "Address must be between 2 and 500 characters")
     private String address;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(
-            name = "patient_allergies",
-            joinColumns = @JoinColumn(name = "patient_id")
-    )
+    @ElementCollection
+    @CollectionTable(name = "patient_allergies", joinColumns = @JoinColumn(name = "patient_id"))
     @Column(name = "allergy")
-    @Builder.Default
-    private List<String> allergies = new ArrayList<>();
+    private List<String> allergies;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "doctor_id")
+    @ManyToOne
     private Doctor primaryDoctor;
 
-    @OneToMany(
-            mappedBy = "patient",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.EAGER
-    )
-    @Builder.Default
-    private List<Appointment> appointments = new ArrayList<>();
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
+    private List<Appointment> appointments;
 }

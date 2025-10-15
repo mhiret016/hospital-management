@@ -5,11 +5,11 @@ import com.example.health.hospital_management.dtos.PostNewAppointmentRequest;
 import com.example.health.hospital_management.dtos.UpdateAppointmentRequest;
 import com.example.health.hospital_management.entities.Appointment;
 import com.example.health.hospital_management.entities.enums.HospitalRole;
-import com.example.health.hospital_management.entities.enums.Status;
+import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
+
+@Service
 public interface AppointmentService {
     AppointmentInformation createAppointment(PostNewAppointmentRequest request);
     List<AppointmentInformation> getAppointmentsById(long id, HospitalRole role);

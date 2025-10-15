@@ -19,7 +19,7 @@ public class PatientMapper {
                 BiologicalSex.valueOf(request.biologicalSex().toUpperCase()),
                 request.phone(),
                 request.address(),
-                List.of(request.allergies().split(",")),
+                Arrays.asList(request.allergies().split(",")),
                 null, null
         );
     }
@@ -27,13 +27,13 @@ public class PatientMapper {
     public static PatientInformation toDto(Patient patient) {
         return new PatientInformation(
                 patient.getId(),
-                patient.getFname(),
-                patient.getLname(),
-                patient.getPhone(),
+                patient.getFirstName(),
+                patient.getLastName(),
+                patient.getPhoneNumber(),
                 patient.getAddress(),
-                patient.getDateOfBirth().toString(),
-                patient.getBiologicalSex().name(),
-                String.join(",", patient.getAllergies())
+                patient.getDateOfBirth(),
+                patient.getBiologicalSex(),
+                patient.getAllergies()
         );
     }
 
@@ -42,11 +42,11 @@ public class PatientMapper {
                 patientInformation.id(),
                 patientInformation.firstName(),
                 patientInformation.lastName(),
-                LocalDate.parse(patientInformation.dateOfBirth()),
-                BiologicalSex.valueOf(patientInformation.biologicalSex().toUpperCase()),
+                patientInformation.dateOfBirth(),
+                patientInformation.biologicalSex(),
                 patientInformation.phoneNumber(),
                 patientInformation.address(),
-                Arrays.stream(patientInformation.allergies().split(",")).toList(),
+                patientInformation.allergies(),
                 null, null
         );
     }

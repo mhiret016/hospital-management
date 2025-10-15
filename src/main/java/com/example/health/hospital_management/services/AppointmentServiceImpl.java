@@ -29,26 +29,31 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentInformation createAppointment(PostNewAppointmentRequest request) {
-        Patient patient = patientRepository.findById(request.getPatientId())
+        Patient patient = patientRepository.findById(request.patientId())
                 .orElseThrow(() -> new PatientNotFoundException(
-                        "Patient with id of " + request.getPatientId() + " not found"
+                        "Patient with id of " + request.patientId() + " not found"
                 ));
-        Doctor doctor = doctorRepository.findById(request.getDoctorId())
+        Doctor doctor = doctorRepository.findById(request.doctorId())
                 .orElseThrow(() -> new DoctorNotFoundException(
-                        "Doctor with the id " + request.getDoctorId() + " not found"
+                        "Doctor with the id " + request.doctorId() + " not found"
                 ));
-        Appointment appointment = new Appointment();
-        appointment.setPatient(patient);
-        appointment.setDoctor(doctor);
-        appointment.setDate(request.getDate());
-        appointment.setTime(request.getTime());
-        appointment.setStatus(Status.BOOKED);
+        Appointment appointment = Appointment.builder()
+                .patient(patient)
+                .doctor(doctor)
+                .date(request.date())
+                .time(request.time())
+                .status(Status.BOOKED)
+                .build();
         return AppointmentMapper.toDto(appointmentRepository.save(appointment));
     }
 
     @Override
     public List<AppointmentInformation> getAppointmentsById(long id, HospitalRole role) {
-        List<Appointment> list = switch (role) {
+        /*
+         * We need to determine what type of id it is
+         * it can either belong to a doctor or patient
+         * */
+        var list = switch (role) {
             case PATIENT -> appointmentRepository.findAllByPatientId(id);
             case STAFF, ADMIN -> appointmentRepository.findAllByDoctorId(id);
         };
@@ -64,8 +69,8 @@ public class AppointmentServiceImpl implements AppointmentService {
                 .orElseThrow(() -> new AppointmentNotFoundException("Appointment with the id of " + id + " not found"));
     }
 
-    @Override
-    public AppointmentInformation updateAppointment(long id, UpdateAppointmentRequest request) {
+    @Override // What would be the bug with this signature
+    public AppointmentInformation updateAppointment(long id,UpdateAppointmentRequest request) {
         return appointmentRepository.findById(id)
                 .map(appointment -> {
                     appointment.setDoctor(

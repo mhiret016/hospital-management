@@ -5,25 +5,16 @@ import com.example.health.hospital_management.dtos.PostNewDoctorRequest;
 import com.example.health.hospital_management.dtos.UpdateDoctorRequest;
 import com.example.health.hospital_management.entities.Doctor;
 import jakarta.validation.constraints.NotNull;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public interface DoctorService {
     List<DoctorInformation> getAllDoctors();
-    @NotNull(message = "Doctor is required")
-
-    Doctor getDoctorById(Long id);
-
-    Doctor getDoctorEntityById(Long id);
-
     DoctorInformation getDoctorById(long id);
-
     List<DoctorInformation> getDoctorsBySpecialization(String specialization);
     DoctorInformation createDoctor(PostNewDoctorRequest request);
-    DoctorInformation updateDoctor(Long id, UpdateDoctorRequest request);
-    void deleteDoctor(Long id);
-
     DoctorInformation updateDoctor(long id, UpdateDoctorRequest request);
-
     void deleteDoctorById(long id);
 }

@@ -6,7 +6,6 @@ import com.example.health.hospital_management.dtos.UpdateDoctorRequest;
 import com.example.health.hospital_management.entities.Doctor;
 import com.example.health.hospital_management.exceptions.DoctorNotFoundException;
 import com.example.health.hospital_management.repositories.DoctorRepository;
-import com.example.health.hospital_management.services.DoctorService;
 import com.example.health.hospital_management.utils.mappers.DoctorMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,6 +15,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
+
     private final DoctorRepository doctorRepository;
 
     @Override
@@ -24,16 +24,6 @@ public class DoctorServiceImpl implements DoctorService {
                 .stream()
                 .map(DoctorMapper::toDto)
                 .toList();
-    }
-
-    @Override
-    public Doctor getDoctorById(Long id) {
-        return null;
-    }
-
-    @Override
-    public Doctor getDoctorEntityById(Long id) {
-        return null;
     }
 
     @Override
@@ -57,16 +47,6 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorInformation updateDoctor(Long id, UpdateDoctorRequest request) {
-        return null;
-    }
-
-    @Override
-    public void deleteDoctor(Long id) {
-
-    }
-
-    @Override
     public DoctorInformation updateDoctor(long id, UpdateDoctorRequest request) {
         Doctor doctor = doctorRepository.findById(id)
                 .orElseThrow(() -> new DoctorNotFoundException("Doctor with the id " + id + " not found!"));
@@ -80,7 +60,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     public void deleteDoctorById(long id) {
-        if(!doctorRepository.existsById(id)){
+        if (!doctorRepository.existsById(id)) {
             throw new DoctorNotFoundException("Doctor with the id " + id + " not found!");
         }
         doctorRepository.deleteById(id);

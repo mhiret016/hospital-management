@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,32 +16,18 @@ import java.time.LocalTime;
 @Table(name = "eva_appointments")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Appointment extends AuditableEntity {
+@Builder
+public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "patientId", nullable = false)
-    @NotNull(message = "Patient is required")
+    @ManyToOne
+    @JoinColumn(name = "patientId")
     private Patient patient;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "doctorId", nullable = false)
-    @NotNull(message = "Doctor is required")
+    @ManyToOne
+    @JoinColumn(name = "doctorId")
     private Doctor doctor;
-
-    @Column(nullable = false)
-    @NotNull(message = "Date is required")
-    @FutureOrPresent(message = "Appointment date must be today or in the future")
     private LocalDate date;
-
-    @Column(nullable = false)
-    @NotNull(message = "Time is required")
     private LocalTime time;
-
-    @Column(nullable = false)
-    @NotNull(message = "Status is required")
-    @Enumerated(EnumType.STRING)
     private Status status;
 }

@@ -4,7 +4,7 @@ import lombok.Data;
 
 import java.util.List;
 
-@Data
+
 public record DoctorInformation(
         long id,
         String firstName,

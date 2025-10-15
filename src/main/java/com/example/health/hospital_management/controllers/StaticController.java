@@ -1,10 +1,14 @@
 package com.example.health.hospital_management.controllers;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/api/v1/static")
+@RequiredArgsConstructor
 public class StaticController {
 
     @RequestMapping(value = {"/", ""}, method = RequestMethod.GET, produces = "text/html")

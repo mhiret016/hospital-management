@@ -1,6 +1,5 @@
 package com.example.health.hospital_management.config;
 
-import com.example.health.hospital_management.entities.UserCredential;
 import com.example.health.hospital_management.repositories.UserCredentialRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,13 +17,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequiredArgsConstructor
 public class ApplicationConfig {
     private final UserCredentialRepository userCredentialRepository;
-
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> userCredentialRepository
-                .findById(username.toLowerCase())
+                .findByEmail(username.toLowerCase())
                 .orElseThrow(() ->
-                        new UsernameNotFoundException("User with the email " + username + " not found"));
+                        new UsernameNotFoundException("User with email " + username + " not found"));
     }
 
     @Bean
@@ -34,9 +32,8 @@ public class ApplicationConfig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider(
-                userDetailsService()
-        );
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(passwordEncoder());
         return authenticationProvider;
     }

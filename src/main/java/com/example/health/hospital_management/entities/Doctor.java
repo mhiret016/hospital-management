@@ -3,42 +3,33 @@ package com.example.health.hospital_management.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "eva_doctors")
-@Getter
-@Setter
-@ToString(exclude = "patients")
-@EqualsAndHashCode(exclude = "patients")
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class Doctor {
+public class Doctor extends AuditableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
+    private   String firstName;
+    private   String lastName;
+    private   String department;
+    private   String phone;
+    private   String specialization;
+    private   String email;
 
-    @Column(nullable = false)
-    private String firstName;
+    @OneToMany(mappedBy = "primaryDoctor", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<Patient> primaryPatients;
 
-    @Column(nullable = false)
-    private String lastName;
+    public List<Patient> getPatients() {
+        return primaryPatients;
+    }
 
-    @Column(nullable = false)
-    private String specialization;
-
-    @Column(nullable = false)
-    private String department;
-
-    @Column(nullable = false)
-    private String phone;
-
-    @Column(nullable = false)
-    private String email;
-
-    @OneToMany(mappedBy = "primaryDoctor", fetch = FetchType.LAZY)
-    @Builder.Default
-    private List<Patient> patients = new ArrayList<>();
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments;
 }

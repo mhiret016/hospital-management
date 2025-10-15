@@ -1,29 +1,26 @@
 package com.example.health.hospital_management.controllers;
 
 import com.example.health.hospital_management.dtos.AuthRequest;
+import com.example.health.hospital_management.dtos.UserInformation;
 import com.example.health.hospital_management.services.UserCredentialService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
+@RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
 public class UserCredentialController {
     private final UserCredentialService userCredentialService;
 
-    @GetMapping("/register")
-    public String regsiter(Model model) {
-        model.addAttribute("newUser", new AuthRequest("", ""));
-        return "auth/register";
+    @PostMapping("/register")
+    public ResponseEntity<UserInformation> register(@Valid @RequestBody AuthRequest authRequest) {
+        return ResponseEntity.ok(userCredentialService.createUserCredentials(authRequest));
     }
 
-    @PostMapping("/register")
-    public String register(@ModelAttribute("newUser") AuthRequest authRequest) {
-        userCredentialService.createUserCredentials(authRequest);
-        return "redirect:/login";
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@Valid @RequestBody AuthRequest request) {
+        return ResponseEntity.ok(userCredentialService.login(request));
     }
 }
