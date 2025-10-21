@@ -478,13 +478,6 @@ This project is open source and available for educational purposes.
 
 ---
 
-## 📞 Contact
-
-**Your Name**
-- Portfolio: [your-portfolio.com]
-- LinkedIn: [your-linkedin]
-- GitHub: [your-github]
-- Email: [your-email]
 
 ---
 
