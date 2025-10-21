@@ -415,7 +415,7 @@ DB_PASSWORD=<database-password>
 - ✅ Environment variable management
 - ✅ SQL injection prevention (JPA parameterized queries)
 
-For setup instructions, see [SECURITY_SETUP.md](SECURITY_SETUP.md)
+For setup instructions, see [SECURITY_SETUP.md](docs/SECURITY_SETUP.md)
 
 ---
 

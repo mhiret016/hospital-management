@@ -29,8 +29,28 @@ const Login = () => {
     onSuccess: (token) => {
       // Store token in localStorage
       localStorage.setItem("jwt_token", token);
-      // Navigate to dashboard
-      navigate("/dashboard");
+
+      // Decode JWT to get user role
+      try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const payload = JSON.parse(window.atob(base64));
+        const role = payload.role;
+
+        // Navigate based on role
+        if (role === "ADMIN") {
+          navigate("/dashboard/admin");
+        } else if (role === "STAFF") {
+          navigate("/dashboard/doctor");
+        } else if (role === "PATIENT") {
+          navigate("/dashboard/patient");
+        } else {
+          navigate("/dashboard");
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+        navigate("/dashboard");
+      }
     },
   });
 

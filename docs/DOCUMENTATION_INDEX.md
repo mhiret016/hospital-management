@@ -3,7 +3,7 @@
 ## Start Here
 
 ### 🎯 New to This Project?
-Start with **[README.md](README.md)** for project overview and quick start.
+Start with **[README.md](../README.md)** for project overview and quick start.
 
 ### 🚀 Preparing for Interview?
 Go straight to **[INTERVIEW_READY.md](INTERVIEW_READY.md)** - everything you need to ace it!
@@ -16,7 +16,7 @@ Go straight to **[INTERVIEW_READY.md](INTERVIEW_READY.md)** - everything you nee
 
 | Document | Purpose | When to Read |
 |----------|---------|--------------|
-| **[README.md](README.md)** | Project overview, tech stack, setup | First thing - understand what this is |
+| **[README.md](../README.md)** | Project overview, tech stack, setup | First thing - understand what this is |
 | **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)** | Quick reference guide | Need a refresher before interview |
 | **[INTERVIEW_READY.md](INTERVIEW_READY.md)** | Complete interview prep | Day before/morning of interview |
 
@@ -24,9 +24,9 @@ Go straight to **[INTERVIEW_READY.md](INTERVIEW_READY.md)** - everything you nee
 
 | Document | Purpose | When to Read |
 |----------|---------|--------------|
-| **[docs/REQUEST_FLOW.md](docs/REQUEST_FLOW.md)** | Complete request/response flow | When asked "explain the data flow" |
-| **[docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md)** | 50+ Q&A on architecture, backend, frontend | Study this 2-3 days before interview |
-| **[docs/architecture.md](docs/architecture.md)** | Architecture overview | Quick architecture reference |
+| **[docs/REQUEST_FLOW.md](REQUEST_FLOW.md)** | Complete request/response flow | When asked "explain the data flow" |
+| **[docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md)** | 50+ Q&A on architecture, backend, frontend | Study this 2-3 days before interview |
+| **[docs/architecture.md](architecture.md)** | Architecture overview | Quick architecture reference |
 
 ### Setup & Security
 
@@ -49,7 +49,7 @@ Go straight to **[INTERVIEW_READY.md](INTERVIEW_READY.md)** - everything you nee
 
 ### "I'm setting up the project for the first time"
 
-1. [README.md](README.md) - Quick Start section
+1. [README.md](../README.md) - Quick Start section
 2. [SECURITY_SETUP.md](SECURITY_SETUP.md) - Environment setup
 3. [DATABASE_SETUP.md](DATABASE_SETUP.md) - Database info
 
@@ -57,25 +57,25 @@ Go straight to **[INTERVIEW_READY.md](INTERVIEW_READY.md)** - everything you nee
 
 1. [INTERVIEW_READY.md](INTERVIEW_READY.md) - Complete prep guide
 2. [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - Quick facts
-3. [docs/REQUEST_FLOW.md](docs/REQUEST_FLOW.md) - Understand the flow
-4. [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) - Practice Q&A
+3. [docs/REQUEST_FLOW.md](REQUEST_FLOW.md) - Understand the flow
+4. [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md) - Practice Q&A
 
 ### "I need to explain the architecture"
 
-1. [README.md](README.md) - Architecture section
-2. [docs/REQUEST_FLOW.md](docs/REQUEST_FLOW.md) - Complete flow
-3. [docs/architecture.md](docs/architecture.md) - Quick overview
+1. [README.md](../README.md) - Architecture section
+2. [docs/REQUEST_FLOW.md](REQUEST_FLOW.md) - Complete flow
+3. [docs/architecture.md](architecture.md) - Quick overview
 
 ### "I need to explain a specific feature"
 
-1. [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) - Feature explanations
-2. [docs/REQUEST_FLOW.md](docs/REQUEST_FLOW.md) - Step-by-step flow
-3. [README.md](README.md) - API documentation
+1. [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md) - Feature explanations
+2. [docs/REQUEST_FLOW.md](REQUEST_FLOW.md) - Step-by-step flow
+3. [README.md](../README.md) - API documentation
 
 ### "I need to discuss security"
 
 1. [SECURITY_SETUP.md](SECURITY_SETUP.md) - Security practices
-2. [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) - Security section
+2. [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md) - Security section
 3. [SECURITY_CHANGES_SUMMARY.md](SECURITY_CHANGES_SUMMARY.md) - What was implemented
 
 ---
@@ -85,28 +85,28 @@ Go straight to **[INTERVIEW_READY.md](INTERVIEW_READY.md)** - everything you nee
 ### By Topic
 
 **Architecture**:
-- [README.md](README.md) - Architecture section
-- [docs/architecture.md](docs/architecture.md)
-- [docs/REQUEST_FLOW.md](docs/REQUEST_FLOW.md)
+- [README.md](../README.md) - Architecture section
+- [docs/architecture.md](architecture.md)
+- [docs/REQUEST_FLOW.md](REQUEST_FLOW.md)
 
 **Backend**:
-- [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) - Backend Questions
-- [docs/REQUEST_FLOW.md](docs/REQUEST_FLOW.md) - Backend layers explained
+- [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md) - Backend Questions
+- [docs/REQUEST_FLOW.md](REQUEST_FLOW.md) - Backend layers explained
 
 **Frontend**:
-- [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) - Frontend Questions
-- [README.md](README.md) - Tech stack
+- [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md) - Frontend Questions
+- [README.md](../README.md) - Tech stack
 
 **Database**:
 - [DATABASE_SETUP.md](DATABASE_SETUP.md)
-- [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) - Database Questions
+- [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md) - Database Questions
 
 **Security**:
 - [SECURITY_SETUP.md](SECURITY_SETUP.md)
-- [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) - Security Questions
+- [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md) - Security Questions
 
 **DevOps**:
-- [README.md](README.md) - Docker setup
+- [README.md](../README.md) - Docker setup
 - [SECURITY_SETUP.md](SECURITY_SETUP.md) - Environment management
 
 ---
@@ -142,12 +142,12 @@ hospital-management/
 ### For Interview Preparation (3-Day Plan)
 
 **Day 1 - Understanding**:
-1. [README.md](README.md) - Full read (30 min)
+1. [README.md](../README.md) - Full read (30 min)
 2. [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - Full read (15 min)
-3. [docs/REQUEST_FLOW.md](docs/REQUEST_FLOW.md) - Full read (45 min)
+3. [docs/REQUEST_FLOW.md](REQUEST_FLOW.md) - Full read (45 min)
 
 **Day 2 - Questions & Answers**:
-1. [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md) - Full read (60 min)
+1. [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md) - Full read (60 min)
 2. Practice explaining flow out loud (30 min)
 3. Review code in project (30 min)
 
@@ -172,8 +172,8 @@ hospital-management/
 
 ### Before Interview
 ✅ Read [INTERVIEW_READY.md](INTERVIEW_READY.md)
-✅ Review [docs/INTERVIEW_GUIDE.md](docs/INTERVIEW_GUIDE.md)
-✅ Practice explaining [docs/REQUEST_FLOW.md](docs/REQUEST_FLOW.md)
+✅ Review [docs/INTERVIEW_GUIDE.md](INTERVIEW_GUIDE.md)
+✅ Practice explaining [docs/REQUEST_FLOW.md](REQUEST_FLOW.md)
 
 ### During Interview
 📱 Have [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) open for quick reference
@@ -204,7 +204,7 @@ If you add features or make changes:
 
 1. Check this index first
 2. Use Ctrl+F (or Cmd+F) to search within documents
-3. Check [README.md](README.md) FAQ section
+3. Check [README.md](../README.md) FAQ section
 4. Review [TROUBLESHOOTING_LOGIN.md](TROUBLESHOOTING_LOGIN.md)
 
 ---

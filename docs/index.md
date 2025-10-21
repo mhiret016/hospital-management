@@ -7,9 +7,11 @@ Welcome to the Hospital Management System documentation. This comprehensive guid
 1. [System Architecture](architecture.md)
 2. [Core Features](features.md)
 3. [API Documentation](api.md)
-4. [Database Schema](database.md)
-5. [Setup Guide](setup.md)
-6. [Maintenance](maintenance.md)
+4. [Axios Implementation](axios-implementation.md)
+5. [Interview Walkthrough - Role-Based Dashboards](interview-walkthrough.md)
+6. [Database Schema](database.md)
+7. [Setup Guide](setup.md)
+8. [Maintenance](maintenance.md)
 
 ## System Overview
 
@@ -28,7 +30,18 @@ The Hospital Management System is a comprehensive software solution designed to 
 
 ### Technical Stack
 
-- Backend: [Your Backend Technology]
-- Frontend: [Your Frontend Framework]
-- Database: [Your Database System]
-- Authentication: JWT & RBAC
+- Backend: Spring Boot (Java)
+- Frontend: React + TypeScript + Vite
+- UI Framework: Material-UI (MUI)
+- Database: PostgreSQL
+- Authentication: JWT with Role-Based Access Control (RBAC)
+- HTTP Client: Axios (with request/response interceptors)
+- State Management: React Query (TanStack Query)
+
+### User Roles
+
+The system supports three distinct user roles with separate dashboards:
+
+1. **ADMIN** - Full system access with administrative capabilities
+2. **STAFF** - Doctor/medical staff access for appointment and patient management
+3. **PATIENT** - Patient portal for viewing appointments and personal information
