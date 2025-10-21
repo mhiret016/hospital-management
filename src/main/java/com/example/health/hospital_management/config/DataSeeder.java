@@ -35,9 +35,9 @@ public class DataSeeder {
             if (userCredentialRepository.count() == 0) {
                 log.info("Seeding database with initial data...");
 
-                // Create default admin user
+                // Create default admin user (using lowercase email for consistency)
                 UserCredential admin = UserCredential.builder()
-                        .email("admin@eva-hospital.com")
+                        .email("admin@eva-hospital.com".toLowerCase())
                         .password(passwordEncoder.encode("admin123"))
                         .role(HospitalRole.ADMIN)
                         .build();
@@ -46,7 +46,7 @@ public class DataSeeder {
 
                 // Create staff user
                 UserCredential staff = UserCredential.builder()
-                        .email("staff@eva-hospital.com")
+                        .email("staff@eva-hospital.com".toLowerCase())
                         .password(passwordEncoder.encode("staff123"))
                         .role(HospitalRole.STAFF)
                         .build();
@@ -55,7 +55,7 @@ public class DataSeeder {
 
                 // Create patient user
                 UserCredential patientUser = UserCredential.builder()
-                        .email("patient@eva-hospital.com")
+                        .email("patient@eva-hospital.com".toLowerCase())
                         .password(passwordEncoder.encode("patient123"))
                         .role(HospitalRole.PATIENT)
                         .build();

@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -7,17 +8,19 @@ import {
   Button,
   Container,
 } from "@mui/material";
+import { LogOut } from "lucide-react";
 
 const Navbar: React.FC = () => {
-  const navItems = [
-    "Home",
-    "Services",
-    "Doctors",
-    "Appointments",
-    "Patients",
-    "Contact",
-  ];
-  const authItems = ["Sign In", "Register"];
+  const navigate = useNavigate();
+  const location = useLocation();
+  const token = localStorage.getItem("jwt_token");
+  const isAuthenticated = !!token;
+  const isDashboard = location.pathname === "/dashboard";
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt_token");
+    navigate("/login");
+  };
 
   return (
     <AppBar
@@ -33,52 +36,64 @@ const Navbar: React.FC = () => {
             sx={{
               fontWeight: "bold",
               color: "#1976d2",
+              cursor: "pointer",
             }}
+            onClick={() => navigate(isAuthenticated ? "/dashboard" : "/")}
           >
             EVA Hospital
           </Typography>
 
           {/* Navigation + Auth */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            {/* Regular Navigation Links */}
-            {navItems.map((item) => (
-              <Button
-                key={item}
-                sx={{
-                  color: "#333",
-                  textTransform: "none",
-                  fontSize: "1rem",
-                  mx: 0.5,
-                  "&:hover": {
-                    backgroundColor: "#f5f5f5",
-                  },
-                }}
+            {/* Show navigation only on dashboard */}
+            {isDashboard && (
+              <Typography
+                variant="body1"
+                sx={{ color: "#333", mr: 2, fontWeight: "medium" }}
               >
-                {item}
-              </Button>
-            ))}
+                Dashboard
+              </Typography>
+            )}
 
-            {/* Auth Buttons - Separate styling */}
-            <Box sx={{ ml: 2, display: "flex", gap: 1 }}>
-              <Button
-                sx={{
-                  color: "#333",
-                  textTransform: "none",
-                  border: "1px solid #ccc",
-                  minWidth: "80px",
-                }}
-              >
-                Sign In
-              </Button>
-              <Button
-                variant="contained"
-                sx={{
-                  textTransform: "none",
-                  minWidth: "80px",
-                }}
-              >
-                Register
-              </Button>
+            {/* Auth Buttons */}
+            <Box sx={{ display: "flex", gap: 1 }}>
+              {isAuthenticated ? (
+                <Button
+                  variant="outlined"
+                  startIcon={<LogOut size={18} />}
+                  onClick={handleLogout}
+                  sx={{
+                    textTransform: "none",
+                    minWidth: "100px",
+                  }}
+                >
+                  Logout
+                </Button>
+              ) : (
+                <>
+                  <Button
+                    onClick={() => navigate("/login")}
+                    sx={{
+                      color: "#333",
+                      textTransform: "none",
+                      border: "1px solid #ccc",
+                      minWidth: "80px",
+                    }}
+                  >
+                    Sign In
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => navigate("/register")}
+                    sx={{
+                      textTransform: "none",
+                      minWidth: "80px",
+                    }}
+                  >
+                    Register
+                  </Button>
+                </>
+              )}
             </Box>
           </Box>
         </Toolbar>

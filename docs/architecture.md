@@ -1,43 +1,26 @@
 # System Architecture
 
-## Component Overview
+For comprehensive architecture documentation, see:
+- **[Complete Architecture Guide](ARCHITECTURE.md)** - NOT YET CREATED (will be similar to REQUEST_FLOW.md)
+- **[Request/Response Flow](REQUEST_FLOW.md)** - Detailed walk-through of complete data flow
+- **[Interview Guide](INTERVIEW_GUIDE.md)** - Architecture questions and answers
 
-### Backend Architecture
-- RESTful API design
-- Microservices architecture
-- Secure authentication system
-- Data processing pipeline
+## Quick Overview
 
-### Frontend Architecture
-- Component-based structure
-- State management
-- Responsive design
-- Accessibility compliance
+### Three-Tier Architecture
+```
+Frontend (React) → Backend (Spring Boot) → Database (MySQL)
+```
 
-## Security Measures
+### Backend Layers
+```
+Controller → Service → Repository → Entity → Database
+```
 
-- Data encryption (at rest and in transit)
-- Role-based access control (RBAC)
-- Audit logging
-- HIPAA compliance measures
-- Regular backup procedures
+### Key Patterns
+- **Layered Architecture**: Clear separation of concerns
+- **DTO Pattern**: API contracts separate from entities
+- **Dependency Injection**: Spring manages object creation
+- **Repository Pattern**: Data access abstraction
 
-## System Components
-
-### Administrative Module
-- User management
-- System configuration
-- Report generation
-- Access control
-
-### Patient Module
-- Patient registration
-- Appointment management
-- Medical history
-- Billing information
-
-### Doctor Module
-- Schedule management
-- Patient records access
-- Prescription management
-- Treatment planning
+For detailed diagrams and explanations, see the complete documentation above.

@@ -45,7 +45,7 @@ const validationSchema = Yup.object({
     .max(new Date(), "Date of birth cannot be in the future")
     .required("Date of birth is required"),
   biologicalSex: Yup.string()
-    .oneOf(["MALE", "FEMALE"], "Please select a valid biological sex")
+    .oneOf(["MALE", "FEMALE", "INTERSEX", "OTHER"], "Please select a valid biological sex")
     .required("Biological sex is required"),
   phone: Yup.string()
     .matches(
@@ -190,6 +190,8 @@ const NewPatientForm = ({ open, onClose }: NewPatientFormProps) => {
                       <MenuItem value="">Select...</MenuItem>
                       <MenuItem value="MALE">Male</MenuItem>
                       <MenuItem value="FEMALE">Female</MenuItem>
+                      <MenuItem value="INTERSEX">Intersex</MenuItem>
+                      <MenuItem value="OTHER">Other</MenuItem>
                     </TextField>
                   </Grid>
 

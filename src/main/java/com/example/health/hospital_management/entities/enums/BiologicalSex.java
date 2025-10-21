@@ -3,7 +3,8 @@ package com.example.health.hospital_management.entities.enums;
 public enum BiologicalSex {
     MALE("Male"),
     FEMALE("Female"),
-    INTERSEX("Intersex");
+    INTERSEX("Intersex"),
+    OTHER("Other");
 
     private final String displayName;
 

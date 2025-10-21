@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public interface AppointmentService {
     AppointmentInformation createAppointment(PostNewAppointmentRequest request);
+    List<AppointmentInformation> getAllAppointments();
     List<AppointmentInformation> getAppointmentsById(long id, HospitalRole role);
     AppointmentInformation getAppointmentById(long id);
     AppointmentInformation updateAppointment(long id, UpdateAppointmentRequest request);

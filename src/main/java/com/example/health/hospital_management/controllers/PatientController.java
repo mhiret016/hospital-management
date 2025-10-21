@@ -2,6 +2,7 @@ package com.example.health.hospital_management.controllers;
 
 import com.example.health.hospital_management.dtos.PatientInformation;
 import com.example.health.hospital_management.dtos.PostNewPatientRequest;
+import com.example.health.hospital_management.dtos.UpdatePatientRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import com.example.health.hospital_management.services.PatientService;
@@ -30,5 +31,18 @@ public class PatientController {
     @PostMapping("/add-patient")
     public ResponseEntity<PatientInformation> postNewPatient(@RequestBody @Valid PostNewPatientRequest request) {
         return ResponseEntity.created(null).body(patientService.createPatient(request));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PatientInformation> updatePatient(
+            @PathVariable long id,
+            @RequestBody @Valid UpdatePatientRequest request) {
+        return ResponseEntity.ok(patientService.updatePatient(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletePatient(@PathVariable long id) {
+        patientService.deletePatientById(id);
+        return ResponseEntity.noContent().build();
     }
 }

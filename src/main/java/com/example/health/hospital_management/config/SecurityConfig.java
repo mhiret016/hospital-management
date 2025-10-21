@@ -24,11 +24,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .cors(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configure(http))  // Enable CORS with CorsConfig
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(htp ->
                         htp
                                 .requestMatchers("/api/v1/auth/**").permitAll()  // 👈 allow login/register
+                                .requestMatchers("/actuator/health").permitAll()  // 👈 allow health check
                                 .anyRequest().authenticated()                   // everything else requires token
                 )
                 .sessionManagement(ses -> ses.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -50,4 +50,10 @@ public class DoctorController {
     ) {
         return ResponseEntity.ok(doctorService.updateDoctor(id, request));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDoctor(@PathVariable long id) {
+        doctorService.deleteDoctorById(id);
+        return ResponseEntity.noContent().build();
+    }
 }

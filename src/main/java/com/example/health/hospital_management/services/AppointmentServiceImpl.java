@@ -48,6 +48,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    public List<AppointmentInformation> getAllAppointments() {
+        return appointmentRepository.findAll()
+                .stream()
+                .map(AppointmentMapper::toDto)
+                .toList();
+    }
+
+    @Override
     public List<AppointmentInformation> getAppointmentsById(long id, HospitalRole role) {
         /*
          * We need to determine what type of id it is
